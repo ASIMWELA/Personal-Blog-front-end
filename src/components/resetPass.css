@@ -1,0 +1,5 @@
+#userPasswordResetEmail:active, :focus{
+    outline: none;
+    transition: none;
+    box-shadow: none !important;
+}

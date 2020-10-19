@@ -1,0 +1,24 @@
+#skill-container{
+    border: #1abc9c solid 2px;
+    border-radius: 30px;
+    padding: 3%;
+   
+}
+#skill-card{
+  
+    border: solid #1abc9c 0.3px;
+    border-radius: 10px;
+    margin: 1%;
+    padding: 1%;
+   
+}
+.form-buttons{
+    display: flex;
+    flex-direction: row;
+}
+#editSkillBtn{
+    margin-right: 1%;
+}
+#cancelEditSkillBtn{
+    margin-left: 7rem;
+}

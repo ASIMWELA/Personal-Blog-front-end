@@ -1,0 +1,15 @@
+#subscribe-form{
+    display: block;
+    align-items: center;
+    margin: auto;
+}
+
+#submitBtn{
+    text-align: center;
+    font-size: 1.5rem;
+    width: 50%;
+    margin-left: 25%;
+    background-color: #0D47A1 ;
+    color: white;
+
+}

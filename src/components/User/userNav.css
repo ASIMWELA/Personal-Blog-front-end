@@ -1,0 +1,23 @@
+#userNav{
+    background-color: #90A4AE !important;
+    display:flex;
+    flex-direction: column;
+    height : 1px !important;
+}
+#userLogoutBtn{
+    float: right ; 
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+.nav-container #userNav{
+    background-color: #90A4AE !important;
+}
+
+#userName{
+    display: block;
+    justify-content: center;
+    text-align: center;
+    margin-left: auto;
+    margin-top: 1.5%;
+}

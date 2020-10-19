@@ -1,0 +1,44 @@
+.project-list{
+    margin-top: 2%;
+    margin-right: 2rem;
+    box-shadow: 10px 10px 10px 5px #888888;
+   
+}
+.project-list:hover{
+    box-shadow: 5px 10px 10px 5px #888888;
+   
+    transition: all 200ms ease-out
+}
+.add-project-button{
+    padding:10px;
+    color:black;
+}
+#project-card{
+    overflow-y: hidden;
+     z-index: initial;
+}
+.add-project-button:hover{
+    padding:10px;
+    color:black;
+    border-radius: 25px;
+    background-color: #BDBDBD;
+    border: 2px solid #BDBDBD;
+    transition-delay: 0.2s;
+}
+#project-form{
+  
+    position: fixed;
+    bottom: 11%;
+    right: 0;
+    
+
+}
+
+@media screen and (max-width: 960px) {
+    #project-form{
+  
+        position: relative;
+       
+    
+    }
+}
