@@ -252,9 +252,9 @@ export default function ChatMessageBox() {
 
     const openAdminPanel = () => {
         document.querySelector(".admin-chatbox").style.display = "block"
+        document.querySelector(".groupMsg").style.zIndex="-1"
     }
 
-    console.log(admin)
 
     return (
         <div>
@@ -262,7 +262,8 @@ export default function ChatMessageBox() {
                 (
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col-md-8">
+                            <div className="col-md-1"></div>
+                            <div className="col-md-6">
 
                                 {
                                     state.channelConnected ?
@@ -324,6 +325,7 @@ export default function ChatMessageBox() {
                                 }
 
                             </div>
+                            <div className="col-md-1"></div>
                             <div className="col-md-4" >
                                 <div className="admin-chatbox" >
                                     <div id="user-frame">
