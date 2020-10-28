@@ -3,7 +3,7 @@ import { authenticateUser } from '../../../utils/AuthUtils'
 import { findChatMessages, getUsers, countNewMessages, getGroupMessages } from '../../../utils/APIUtils'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import { Button } from 'antd'
-import { FaPaperPlane, FaEnvelopeOpenText } from 'react-icons/fa'
+import { FaPaperPlane, FaEnvelope } from 'react-icons/fa'
 import { Link, useHistory } from 'react-router-dom'
 import { BASE_MESSAGING_URL } from '../../../constants'
 import { pageAdmin } from '../../../contex'
@@ -378,11 +378,10 @@ export default function ChatMessageBox() {
                         </div>
                         <div className="open-admin-icon">
 
-                            {state.channelConnected && <span> <div>
-                                {admin && <span>{admin.online ? <span>{admin.userName} is online</span> : <span>{admin.userName} is offline<br />Leave a message</span>}</span>}
-                            </div>
-                                <Button onClick={openAdminPanel} icon={<FaEnvelopeOpenText size={40} />} className="mail-icon" />
-                            </span>}
+                            {state.channelConnected && <span> 
+                               
+                            <Button type="primary" onClick={openAdminPanel} shape="circle" icon={<FaEnvelope size={40}/>} className="mail-icon"/>
+                               </span>}
 
                         </div>
                     </div>

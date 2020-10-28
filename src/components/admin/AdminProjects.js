@@ -37,8 +37,12 @@ export default function Projects() {
         setLoading(true)
         axios.get(BASE_URL + '/projects')
             .then(projectData => {
-                setProjects(projectData.data._embedded.projectList)
                 setLoading(false)
+                if(projectData.data._embedded===undefined){
+                    setProjects([])
+                }else{
+                    setProjects(projectData.data._embedded.projectList)
+                } 
             }).catch(err => {
                 console.log(err)
                 setLoading(false)
@@ -293,8 +297,10 @@ export default function Projects() {
             console.log(err)
             setLoading(false)
         })
-        if (projects) {
+        if (projects._embedded) {
             setProjects(projects._embedded.projectList)
+            setLoading(false)
+        }else{
             setLoading(false)
         }
 

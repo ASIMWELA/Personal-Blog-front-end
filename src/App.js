@@ -15,6 +15,7 @@ import Education from './components/admin/Education'
 import Address from './components/admin/Address'
 import User from './components/User/User'
 import Abilities from './components/Abilities'
+import Contact from './components/Contact'
 import AdminSideNav from './components/admin/AdminSideNav'
 import { Switch, Route } from 'react-router-dom'
 //import Footer from './components/Footer'
@@ -33,6 +34,7 @@ function App() {
           <Route path="/profile/" component={Profile} />
           <Route path="/projects/" component={Projects} />
           <Route path="/register" component={Register} />
+          <Route path="/contact" component={Contact} />
           <Route path="/abilities" component={Abilities} />
         </Switch>
       </div>

@@ -1,18 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contex'
 import { Card } from 'react-bootstrap'
 import { Link } from "react-router-dom"
 import './projects.css'
 export default function Projects() {
-    const { projectData } = useContext(UserContext)
-    let projects = []
+    const { projectData, loading } = useContext(UserContext)
+   
+    console.log(projectData, loading)
 
-    if (!projectData.data) {
-        return <div>Loading</div>
-    }
-    if (projectData.data._embedded.projectList) {
-        projects = projectData.data._embedded.projectList
-    }
 
     return (
         <div className="container-fluid">
@@ -25,45 +20,48 @@ export default function Projects() {
                     <hr />
                     <div className="row">
                         {
-                            projects.map(project => {
-                                return (
-                                    <div className="col-md-4" key={project.name}>
-                                        <Card style={{ display: "group", textAlign: "center", margin: "3%" }} id="project-card">
-                                            <Card.Title style={{ marginTop: "1%", marginBottom: "2px" }}>{project.name}</Card.Title>
-
-                                            <Card.Body>
-                                                <strong>Description</strong>
-                                                <p>{project.description}</p>
-                                                <p><strong>Role:</strong> {project.role}</p>
-                                                <p>
-                                                    {project.collaborators &&
-
-                                                        <span>
-                                                            <strong>Collaborators:</strong>
-                                                            {project.collaborators.map(collabs => {
-                                                                return (
-
-
-                                                                    <span key={project.name + collabs}> {collabs + ', '}</span>
-
-
-                                                                )
-                                                            })}
-                                                        </span>
-                                                    }
-
-
-                                                </p>
-
-
-
-                                            </Card.Body>
-                                            <Card.Footer> <Link to={`//${project.locationLink}`} target="_blank" id="project-link"> View Project in production</Link> </Card.Footer>
-                                        </Card>
-                                    </div>
-
-                                )
-                            })
+                            loading?<div>Loading</div>:(
+                                projectData.map(project => {
+                                    return (
+                                        <div className="col-md-4" key={project.name}>
+                                            <Card style={{ display: "group", textAlign: "center", margin: "3%" }} id="project-card">
+                                                <Card.Title style={{ marginTop: "1%", marginBottom: "2px" }}>{project.name}</Card.Title>
+    
+                                                <Card.Body>
+                                                    <strong>Description</strong>
+                                                    <p>{project.description}</p>
+                                                    <p><strong>Role:</strong> {project.role}</p>
+                                                    <p>
+                                                        {project.collaborators &&
+    
+                                                            <span>
+                                                                <strong>Collaborators:</strong>
+                                                                {project.collaborators.map(collabs => {
+                                                                    return (
+    
+    
+                                                                        <span key={project.name + collabs}> {collabs + ', '}</span>
+    
+    
+                                                                    )
+                                                                })}
+                                                            </span>
+                                                        }
+    
+    
+                                                    </p>
+    
+    
+    
+                                                </Card.Body>
+                                                <Card.Footer> <Link to={`//${project.locationLink}`} target="_blank" id="project-link"> View Project in production</Link> </Card.Footer>
+                                            </Card>
+                                        </div>
+    
+                                    )
+                                })
+                            )
+                           
                         }
                     </div>
                 </div>

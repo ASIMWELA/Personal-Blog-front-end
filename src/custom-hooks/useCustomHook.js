@@ -5,19 +5,22 @@ import axios from 'axios'
 import { BASE_URL } from '../constants'
 
 export const useGetUser = (userId) => {
+
     const [user, setUser] = useState({})
 
-    useEffect(() => {
-        axios.get(BASE_URL + `/users/${userId}`, {
-            header: {
-                'Access-Control-Allow-Origin': '*'
-            }
-        })
-            .then(userData => {
-                setUser(userData)
+    useEffect(
+        () => {
+            if (!userId) return
+            axios.get(BASE_URL + `/users/${userId}`, {
+                header: {
+                    'Access-Control-Allow-Origin': '*'
+                }
             })
-            .catch(error => { console.log(error) });
-    }, [userId])
+                .then(userData => {
+                    setUser(userData)
+                })
+                .catch(error => { console.log(error) });
+        }, [userId])
 
     return user
 

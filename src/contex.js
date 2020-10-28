@@ -11,7 +11,7 @@ const UserProvider = (props) => {
     const [users, setUsers] = useState({ users: null })
     const [adminId, setAdminId] = useState({ adminId: null })
     const [loading, setLoading] = useState({ loading: true })
-    const [projectData, setProjects] = useState({ projectData: null })
+    const [projectData, setProjects] = useState([])
 
     // function updateLoggedInUser(user) {
     //     setLoggedInUser((loggedInUser) => ({ ...loggedInUser, user }))
@@ -33,14 +33,28 @@ const UserProvider = (props) => {
                 setUsers(data)
             }).catch(err => console.log(err))
 
-        axios.get(BASE_URL + '/projects')
-            .then(projectData => {
-                setProjects(projectData)
-                setLoading(false)
-            }).catch(err => console.log(err));
-
 
     }, [adminId])
+    useEffect(() => {
+        setLoading(true)
+        axios.get(BASE_URL + '/projects')
+            .then(projectData => {
+                setLoading(false)
+                if(projectData.data._embedded===undefined){
+                    setProjects([])
+                }else{
+                    setProjects(projectData.data._embedded.projectList)
+                }
+                
+            }).catch(err => {
+                setLoading(false)
+                console.log(err)
+                setProjects([])
+                
+            });
+
+    }, [])
+
     //
     return (
         <UserContext.Provider value={{ users, adminId, loading, projectData }}>
