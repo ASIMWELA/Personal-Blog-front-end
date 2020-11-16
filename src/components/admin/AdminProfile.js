@@ -18,6 +18,7 @@ export default function Profile() {
     const [showSecondModal, setShowSecondModa] = useState(false)
     const [admins, setAdmin] = useState([])
     const [loading, setLoading] = useState(true)
+    const [activeAdmin, setActiveAdmin]=useState()
 
     let isAdminAuthenticated = authenticateAdmin()
 
@@ -39,9 +40,11 @@ export default function Profile() {
 
     useEffect(() => {
         refreshAdminData()
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+  
     const refreshAdminData = async () => {
         if (!user.uid) return
         const users = await axios.get(BASE_URL + "/users").then(users => {
@@ -53,6 +56,11 @@ export default function Profile() {
         })
 
         setAdmin(admins)
+
+        const admin = admins.find(adm => {
+            return adm.userName === userName
+        })
+        setActiveAdmin(admin)
     }
 
     let token = null
@@ -203,7 +211,7 @@ export default function Profile() {
 
 
     }
-
+console.log(admins)
     const submitEdit = () => {
         setShowSecondModa(true)
         setData({
@@ -267,7 +275,7 @@ export default function Profile() {
                                 <div className="col-sm-2"></div>
                                 <div className="col-sm-8">
                                     <div>
-                                        <img src="/images/user.png"
+                                        <img src={"/images/user.png"}
                                             className="img-responsive img-circle margin"
                                             id="displayI"
                                             alt="display"
