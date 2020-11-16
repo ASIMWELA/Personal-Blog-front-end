@@ -28,7 +28,7 @@ export default function Profile() {
     console.log(admin)
 
     return (
-        < div className="header-container">
+        < div className="header-container" id="profilePage">
             <h3 className="profile-heading">My Profile</h3>
             <small className="profile-info">Full resume. Education, Experience, Employment</small>
             <hr />

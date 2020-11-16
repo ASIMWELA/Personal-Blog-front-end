@@ -1,5 +1,5 @@
 .header-container{
-    background-color: #EFEBE9;
+    
     margin-top: 0;
 }
 .profile-heading{
@@ -13,6 +13,11 @@
 .experience{
     margin-top: 5%;
     margin-left: 0;
+}
+#profilePage{
+
+    margin-right: 25px;
+    margin-left: 25px;
 }
 .profile-info{
     font-family: sans-serif;

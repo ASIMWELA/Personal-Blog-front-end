@@ -50,8 +50,11 @@ export default function Register() {
 
 
             }
+           
 
-        }).catch(err => {
+        })
+        .catch(err => {
+            console.log(err)
 
             if ((err.message).indexOf('409') >= 0 || (ErrorEvent.statusText).indexOf('409') >= 0) {
                 setData({

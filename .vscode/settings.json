@@ -1,5 +1,7 @@
 {
     "terminal.explorerKind": "external",
     "terminal.integrated.automationShell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-    "terminal.integrated.env.windows": {}
+    "terminal.integrated.env.windows": {
+        
+    }
 }

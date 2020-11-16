@@ -50,3 +50,15 @@ p {font-size: 16px;}
     font-weight:bolder;
     font-size:1.7rem;
 }
+#eduDetailsCard{
+   min-height: 335px;
+   max-height: 335px;
+}
+.awardList{
+    list-style: square;
+    margin: 12px 2px;
+}
+
+.awardListComponent{
+    overflow-y: scroll;
+}

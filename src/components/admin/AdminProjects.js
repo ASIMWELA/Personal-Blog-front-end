@@ -185,10 +185,6 @@ export default function Projects() {
     }
 
 
-
-
-
-
     function deleteProject(event) {
 
         let project = event.currentTarget.value
@@ -255,7 +251,6 @@ export default function Projects() {
             }
 
         }
-
         axios({
             method: 'put',
             url: BASE_URL + `/projects/${selectedProject}`,
@@ -513,7 +508,7 @@ export default function Projects() {
 
                                 <span className="subCancelBtn" style={{ marginTop: "1%" }}>
 
-                                    <button type="button" id="submitBtn" className="btn btn-primary" style={{ marginRight: "5%" }} onClick={data.submitEdit ? handleSubmit(saveProject) : handleSubmit(handleFormSubmit)} >{data.isSubmitting ? "Submitting..." : "Submit"}</button>
+                                    <button type="button" id="submitBtn" className="btn btn-primary" style={{ marginRight: "5%" }} onClick={data.submitEdit ? handleSubmit(saveProject) : handleSubmit(handleFormSubmit)} disabled={data.isSubmitting }>{data.isSubmitting ? "Submitting..." : "Submit"}</button>
 
                                 </span>
 

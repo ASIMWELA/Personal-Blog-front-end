@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { useGetUser } from '../custom-hooks/useCustomHook'
-import { FaSearchLocation, FaLaptopCode, FaGraduationCap } from 'react-icons/fa'
+import {  FaLaptopCode, FaGraduationCap } from 'react-icons/fa'
+import LocationMap from './LocationMap'
 
 //styling
 import './Home.css'
@@ -8,31 +9,49 @@ import './Home.css'
 //context
 import { UserContext } from '../contex'
 //components
+import{BASE_PIC_URL} from '../constants'
 
 import { Card } from 'react-bootstrap'
+import Footer from './Footer'
 export default function Home() {
     const { adminId } = useContext(UserContext)
     const adminData = useGetUser(adminId)
 
     let selectedExp = []
     let selectedSkills = []
+    let eduAwards = []
+    let awardsList = []
+    let adminProfile=null
 
     if (!adminData.data && ErrorEvent) {
         return <div>Loading</div>
     }
     if (adminData.data.experience) {
-        selectedExp = adminData.data.experience.slice(0, 4)
+        selectedExp = adminData.data.experience.slice(0, 2)
 
     }
     if (adminData.data.skills) {
-        selectedSkills = adminData.data.skills.slice(0, 3)
+        selectedSkills = adminData.data.skills.slice(0, 2)
     }
+    if(adminData.data.profilePicPath){
+        adminProfile =  adminData.data.profilePicPath
+    }
+    if (adminData.data.education) {
+        eduAwards = adminData.data.education.slice(0, 3)
+        eduAwards.map(award=>{
+         award.awards.map(y=>{
+           awardsList.push(y)
+         })
+        })
+    }
+
+    console.log(adminProfile)
 
     return (
         <React.Fragment>
             <div className="container-fluid bg-1 text-center">
                 <h3 className="margin">Who Am I?</h3>
-                <img src="images/user.png" id="displayImg" className="img-responsive img-circle margin" style={{ display: "inline", displayRadius: "5rem" }} alt="display" width="300" height="300" />
+            <img src={adminProfile?BASE_PIC_URL+"/"+adminProfile:"/images/user.png"} id="displayImg" className="img-responsive img-circle margin" style={{ display: "inline", displayRadius: "5rem" }} alt="display" width="300" height="300" />
                 <h3>Tech enthusiast</h3>
             </div>
 
@@ -43,13 +62,14 @@ export default function Home() {
             </div>
 
             <div className="container-fluid bg-3 text-center">
-                <h3 className="margin">Resume</h3><br />
-                <div className="row">
-
-                    <div className="col-sm-5">
-                        <Card className="contacts-card">
+                <h3 className="margin">Resume Summary</h3><br />
+                <div className="row" id="resumeSummary">
+                    <div className="col-md-2"></div>
+                    <div className="col-sm-4">
+                        {selectedExp.length===0 || selectedExp.length===0 ? null:(
+                            <Card className="contacts-card" style={{marginRight:"5rem"}}>
                             <Card.Title className="contact-header"><FaLaptopCode size={40} />Selected skills</Card.Title>
-                            <Card.Body>
+                            <Card.Body >
                                 <div className='row'>
                                     <div className="col-sm-6">
                                         <div className="table-responsive">
@@ -57,7 +77,7 @@ export default function Home() {
 
                                                 <thead>
                                                     <tr >
-                                                        <th colSpan={2}>Experience</th>
+                                                    {selectedExp.length!==0 &&  <th colSpan={2}>Experience</th>}  
                                                     </tr>
                                                     <tr>
                                                         <th>Tech</th>
@@ -81,7 +101,7 @@ export default function Home() {
                                         </div>
 
                                     </div><div className="col-sm-6">
-                                        <h3> Skills </h3>
+                                    {selectedSkills.length!==0 && <h3> Skills </h3>} 
                                         <ul className="list-group">
                                             {
                                                 selectedSkills.map(skill => {
@@ -105,32 +125,48 @@ export default function Home() {
                                 </div>
                             </Card.Body>
                         </Card>
+                        )}
+                        
                     </div>
 
                     <div className="col-sm-4">
-                        <h4><FaGraduationCap size={40} />Education</h4>
-                        <img src="images/responsive_web.jpg" className="img-responsive margin" style={{ width: "100%" }} alt="name" />
-                    </div>
+                        {
+                            awardsList.length!==0?(
+                                <Card className="contacts-card" style={{marginLeft:"5rem"}} id="eduDetailsCard">
+
+                               <Card.Subtitle><h4><FaGraduationCap size={40} />Education Awards</h4></Card.Subtitle> 
+                               <Card.Body className="awardListComponent">
+                                   <ul >
+                                   {
+                                    awardsList.map(award=>{
+                                        return(
+                                        <li key={award} className="awardList">{award}</li>
+                                                   
+                                        )
+                                    })
+                                }
+                                </ul>
+                                </Card.Body>
+                                </Card>
+                                
+                            ):null
+                        }
+                        
+                  </div>
 
                 </div>
+                <div className="col-md-2"></div>
+                
                 <div className="row">
-                    <div className="col-sm-4">
-                        <h4><FaSearchLocation />Geographical Location</h4>
-                        <img src="images/responsive_web.jpg" className="img-responsive margin" style={{ width: "100%" }} alt="name2" />
+                    <div className="col-md-2"></div>
+                    <div className="col-md-8">
+                        <LocationMap/>
                     </div>
-
-                    <div className="col-sm-4">
-                        <h4><FaLaptopCode />Selected skills</h4>
-                        <img src="images/responsive_web.jpg" className="img-responsive margin" style={{ width: "100%" }} alt="mane3" />
-                    </div>
-
-                    <div className="col-sm-4">
-                        <h4><FaGraduationCap />Education</h4>
-                        <img src="images/responsive_web.jpg" className="img-responsive margin" style={{ width: "100%" }} alt="name" />
-                    </div>
-
+                    <div className="col-md-2"></div>
                 </div>
             </div>
+            <Footer/>
+
         </React.Fragment>
     );
 

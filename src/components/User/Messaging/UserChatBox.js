@@ -27,7 +27,6 @@ export default function ChatMessageBox() {
         privateChatMessage: '',
         bulkMessages: [],
         openNotifications: false,
-
     }
 
     let [state, setState] = useState(initialState);
@@ -149,8 +148,6 @@ export default function ChatMessageBox() {
         loadContacts()
 
     }
-
-
 
     const loadContacts = () => {
         if (!token) return

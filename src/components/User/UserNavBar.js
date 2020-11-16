@@ -44,7 +44,7 @@ export default function UserNavBar(props) {
                     <FaUser size={20} />| Welcome {userName}
                 </li>
                 <li className="nav-item" >
-                    <Button onClick={logout} id="userLogoutBtn" icon={<FiLogOut size={25} />} disabled={props.disable}>Logout </Button>
+                    <Button onClick={logout} id="userLogoutBtn" icon={<FiLogOut size={25} />} >Logout </Button>
                 </li>
 
             </ul>

@@ -111,7 +111,7 @@ export default function Login(props) {
                                 </div>
                                 <div><Link to='/forgot-password'>Forgot password? </Link></div>
 
-                                <button type="button" className="btn btn-primary" style={{ width: "100%", marginTop: "3px" }} onClick={handleFormSubmit}>
+                                <button type="button" className="btn btn-primary" style={{ width: "100%", marginTop: "3px" }} onClick={handleFormSubmit} disabled={data.isSubmitting}>
                                     {data.isSubmitting ? (
                                         "Signing In..."
                                     ) : (

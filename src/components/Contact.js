@@ -156,7 +156,7 @@ const Contact = () => {
                             <small style={{ marginBottom: "2rem" }}>Note: all fields marked with <sup style={{ color: "#f44336" }}>*</sup> are required</small><br />
                             <br />
                             <span className="subCancelBtn" style={{ marginTop: "3%" }}>
-                                <button type="submit" id="submitBtn" className="btn btn-primary" style={{ marginRight: "5%" }}>{data.isSubmitting ? "Sending..." : "Send"}</button>
+                                <button type="submit" id="submitBtn" className="btn btn-primary" style={{ marginRight: "5%" }} disabled={data.isSubmitting}>{data.isSubmitting ? "Sending..." : "Send"}</button>
 
                             </span> </form>
 
