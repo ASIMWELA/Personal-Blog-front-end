@@ -3,13 +3,15 @@ import { Button } from 'react-bootstrap'
 import { FaEdit, FaTrash } from "react-icons/fa"
 import { useForm } from 'react-hook-form'
 import { useHistory, Redirect } from "react-router-dom"
-import { BASE_URL } from '../../constants'
+import { BASE_URL, BASE_PIC_URL } from '../../constants'
 import FormSubmitError from '../FormSubmitError'
 import axios from 'axios'
 import { authenticateAdmin } from '../../utils/AuthUtils'
 import './profile.css'
 import { MdCreate } from 'react-icons/md'
 import Modal from 'react-bootstrap/Modal'
+import $ from 'jquery'
+import { Link } from '@material-ui/core';
 
 export default function Profile() {
     const { register, handleSubmit, errors } = useForm()
@@ -17,6 +19,7 @@ export default function Profile() {
     const [showModal, setShowModal] = useState(false)
     const [showSecondModal, setShowSecondModa] = useState(false)
     const [admins, setAdmin] = useState([])
+    const [profilePic, setProfile]=useState()
     const [loading, setLoading] = useState(true)
     const [activeAdmin, setActiveAdmin]=useState()
 
@@ -66,18 +69,24 @@ export default function Profile() {
     let token = null
     let user = null;
     let userName = null
+    let userObj = null
+    let adminProfile = null
 
     if (isAdminAuthenticated) {
-        let userObj = JSON.parse(localStorage.getItem('admin'))
+       userObj  = JSON.parse(localStorage.getItem('admin'))
         token = userObj.access_TOKEN
         user = userObj.user
         userName = user.userName
+        console.log(userObj)
 
     }
     else {
         history.push('/')
     }
-
+    if(userObj.user.profilePicPath){
+        adminProfile =  userObj.user.profilePicPath
+    }
+    
     const editDetails = (event) => {
         setShowSecondModa(true)
         const userName = event.currentTarget.value
@@ -211,7 +220,7 @@ export default function Profile() {
 
 
     }
-console.log(admins)
+
     const submitEdit = () => {
         setShowSecondModa(true)
         setData({
@@ -261,6 +270,28 @@ console.log(admins)
 
         })
     }
+    const imageUploadHandler =  (event) => {
+        setProfile(event.target.files[0])
+      }
+     const  uploadHandler = () => {
+        const formData = new FormData()
+        formData.append(
+          'profileImage',
+          profilePic
+        )
+
+     
+        axios({
+                method:'post', 
+                url:`${BASE_URL}/upload-profile/${userName}`,headers: {
+            "Content-Type": "multipart/form-data;",
+            "Authorization": `Bearer ${token}`
+        },data:formData}).then(res=>{
+            console.log(res)
+            
+        })
+      }
+   
     return (
         <>{isAdminAuthenticated ? (
             <div>
@@ -275,13 +306,14 @@ console.log(admins)
                                 <div className="col-sm-2"></div>
                                 <div className="col-sm-8">
                                     <div>
-                                        <img src={"/images/user.png"}
-                                            className="img-responsive img-circle margin"
-                                            id="displayI"
-                                            alt="display"
-                                            style={{ marginLeft: "4%" }}
-                                            width="200"
-                                            height="200" />
+                                    <img src={adminProfile?BASE_PIC_URL+"/"+adminProfile:"/images/user.png"} id="displayImg" className="img-responsive img-circle margin" style={{ display: "inline", displayRadius: "5rem" }} alt="display" width="300" height="300" />
+       
+
+{profilePic?null:<input type="file" onChange={imageUploadHandler} />}
+                        {profilePic?<button onClick={uploadHandler}>Upload {profilePic.name}</button>:null}
+
+
+                                            
 
                                     </div>
 

@@ -45,7 +45,7 @@ export default function Home() {
         })
     }
 
-    console.log(adminProfile)
+    
 
     return (
         <React.Fragment>

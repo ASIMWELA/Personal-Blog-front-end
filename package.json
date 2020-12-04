@@ -28,6 +28,10 @@
     "recoil-persist": "^0.6.0",
     "sockjs-client": "^1.5.0"
   },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -50,6 +54,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.13.0"
+    "eslint": "^6.6.0"
   }
 }
